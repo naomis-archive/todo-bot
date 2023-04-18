@@ -1,7 +1,7 @@
 {
-  "name": "nodejs-typescript-template",
+  "name": "todo-bot",
   "version": "0.0.0",
-  "description": "A template for my nodejs projects",
+  "description": "A personal task management bot.",
   "main": "prod/index.js",
   "scripts": {
     "build": "tsc",
@@ -11,21 +11,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/naomi-lgbt/nodejs-typescript-template.git"
+    "url": "git+ssh://git@github.com/naomi-lgbt/todo-bot.git"
   },
   "keywords": [
-    "template",
+    "discord.js",
+    "discord",
+    "bot",
     "typescript",
-    "eslint",
-    "nodejs",
-    "prettier"
+    "todo",
+    "task",
+    "management"
   ],
   "author": "Naomi Carrigan",
   "license": "AGPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/naomi-lgbt/nodejs-typescript-template/issues"
+    "url": "https://github.com/naomi-lgbt/todo-bot/issues"
   },
-  "homepage": "https://github.com/naomi-lgbt/nodejs-typescript-template#readme",
+  "homepage": "https://github.com/naomi-lgbt/todo-bot#readme",
   "dependencies": {
     "dotenv": "16.0.3",
     "winston": "3.8.2"
