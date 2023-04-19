@@ -3,8 +3,8 @@ import { SlashCommandBuilder } from "discord.js";
 
 import { DailyModel } from "../database/models/Daily";
 import { Command } from "../interfaces/Command";
-import { errorHandler } from "../utils/errorHandler";
 import { scheduleDaily } from "../modules/scheduleDaily";
+import { errorHandler } from "../utils/errorHandler";
 
 export const dailies: Command = {
   data: new SlashCommandBuilder()
