@@ -41,7 +41,7 @@ import { validateEnv } from "./utils/validateEnv";
       const [type, id] = interaction.customId.split("-");
       const daily = await DailyModel.findById(id);
       if (!daily) {
-        await interaction.update({
+        await interaction.editReply({
           content: "This daily no longer exists.",
           components: [],
         });
@@ -50,7 +50,7 @@ import { validateEnv } from "./utils/validateEnv";
       if (type === "complete") {
         daily.streak++;
         await daily.save();
-        await interaction.update({
+        await interaction.editReply({
           content: `You have completed **${daily.name}**. Your streak is now ${daily.streak} days.`,
           components: [],
         });
@@ -58,7 +58,7 @@ import { validateEnv } from "./utils/validateEnv";
       if (type === "skip") {
         daily.streak = 0;
         await daily.save();
-        await interaction.update({
+        await interaction.editReply({
           content: `You have skipped **${daily.name}**. Your streak is now ${daily.streak} days.`,
           components: [],
         });
