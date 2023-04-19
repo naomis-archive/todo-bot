@@ -4,6 +4,7 @@ export interface Daily extends Document {
   name: string;
   description?: string;
   cron: string;
+  streak: number;
 }
 
 export const DailySchema = new Schema({
@@ -18,6 +19,10 @@ export const DailySchema = new Schema({
   cron: {
     type: String,
     required: true,
+  },
+  streak: {
+    type: Number,
+    default: 0,
   },
 });
 

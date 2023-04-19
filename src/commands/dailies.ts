@@ -67,6 +67,7 @@ export const dailies: Command = {
           name,
           schedule,
           description,
+          streak: 0,
         });
 
         await interaction.editReply({
@@ -99,8 +100,8 @@ export const dailies: Command = {
         const dailies = models.map(
           (model) =>
             `\`${model.name}\` - ${toString(model.cron)}\n${
-              model.description
-            }\n`
+              model.streak
+            } in a row!\n${model.description}\n`
         );
 
         await interaction.editReply({

@@ -28,6 +28,40 @@ async () => {
   });
 
   bot.on("interactionCreate", async (interaction) => {
+    if (interaction.isButton()) {
+      if (interaction.user.id !== bot.env.ownerId) {
+        await interaction.reply({
+          content: "Only Naomi may use this bot.",
+          ephemeral: true,
+        });
+      }
+      await interaction.deferUpdate();
+      const [type, id] = interaction.customId.split("-");
+      const daily = await DailyModel.findById(id);
+      if (!daily) {
+        await interaction.update({
+          content: "This daily no longer exists.",
+          components: [],
+        });
+        return;
+      }
+      if (type === "complete") {
+        daily.streak++;
+        await daily.save();
+        await interaction.update({
+          content: `You have completed **${daily.name}**. Your streak is now ${daily.streak} days.`,
+          components: [],
+        });
+      }
+      if (type === "skip") {
+        daily.streak = 0;
+        await daily.save();
+        await interaction.update({
+          content: `You have skipped **${daily.name}**. Your streak is now ${daily.streak} days.`,
+          components: [],
+        });
+      }
+    }
     if (!interaction.isChatInputCommand()) {
       return;
     }
