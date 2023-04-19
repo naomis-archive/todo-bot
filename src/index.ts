@@ -7,7 +7,7 @@ import { scheduleDaily } from "./modules/scheduleDaily";
 import { loadCommands } from "./utils/loadCommands";
 import { validateEnv } from "./utils/validateEnv";
 
-async () => {
+(async () => {
   const bot = new Client({
     intents: [GatewayIntentBits.Guilds],
   }) as ExtendedClient;
@@ -87,4 +87,4 @@ async () => {
   });
 
   await bot.login(bot.env.token);
-};
+})();
