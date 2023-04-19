@@ -29,7 +29,11 @@
   },
   "homepage": "https://github.com/naomi-lgbt/todo-bot#readme",
   "dependencies": {
+    "cronstrue": "2.26.0",
+    "discord.js": "14.9.0",
     "dotenv": "16.0.3",
+    "mongoose": "7.0.4",
+    "node-schedule": "2.1.1",
     "winston": "3.8.2"
   },
   "devDependencies": {
@@ -39,6 +43,7 @@
     "@types/chai": "4.3.4",
     "@types/mocha": "10.0.1",
     "@types/node": "18.15.11",
+    "@types/node-schedule": "2.1.0",
     "chai": "4.3.7",
     "eslint": "8.38.0",
     "mocha": "10.2.0",
