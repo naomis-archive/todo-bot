@@ -65,7 +65,7 @@ export const dailies: Command = {
 
         await DailyModel.create({
           name,
-          schedule,
+          cron: schedule,
           description,
           streak: 0,
         });
