@@ -5,6 +5,7 @@ import { DailyModel } from "./database/models/Daily";
 import { ExtendedClient } from "./interfaces/ExtendedClient";
 import { scheduleDaily } from "./modules/scheduleDaily";
 import { loadCommands } from "./utils/loadCommands";
+import { registerCommands } from "./utils/registerCommands";
 import { validateEnv } from "./utils/validateEnv";
 
 (async () => {
@@ -18,6 +19,7 @@ import { validateEnv } from "./utils/validateEnv";
   await connectDatabase(bot);
 
   bot.on("ready", async () => {
+    await registerCommands(bot, bot.commands);
     await bot.env.debugHook.send({
       content: `Bot is ready! Logged in as ${bot.user?.tag}`,
     });
