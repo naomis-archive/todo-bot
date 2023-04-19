@@ -4,6 +4,7 @@ import { SlashCommandBuilder } from "discord.js";
 import { DailyModel } from "../database/models/Daily";
 import { Command } from "../interfaces/Command";
 import { errorHandler } from "../utils/errorHandler";
+import { scheduleDaily } from "../modules/scheduleDaily";
 
 export const dailies: Command = {
   data: new SlashCommandBuilder()
@@ -63,12 +64,14 @@ export const dailies: Command = {
           return;
         }
 
-        await DailyModel.create({
+        const daily = await DailyModel.create({
           name,
           cron: schedule,
           description,
           streak: 0,
         });
+
+        await scheduleDaily(bot, daily);
 
         await interaction.editReply({
           content: `Successfully created a daily with the name \`${name}\`. Will run ${toString(
