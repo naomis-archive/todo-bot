@@ -1,6 +1,6 @@
 {
   "name": "todo-bot",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "A personal task management bot.",
   "main": "prod/index.js",
   "scripts": {
