@@ -45,6 +45,8 @@ import { validateEnv } from "./utils/validateEnv";
           content: "This daily no longer exists.",
           components: [],
         });
+        bot.cronCache[id].cancel();
+        delete bot.cronCache[id];
         return;
       }
       if (type === "complete") {

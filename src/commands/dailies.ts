@@ -83,7 +83,17 @@ export const dailies: Command = {
       if (subcommand === "remove") {
         const name = interaction.options.getString("name", true);
 
+        const daily = await DailyModel.findOne({ name });
+
+        if (!daily) {
+          await interaction.editReply({
+            content: `A daily with the name \`${name}\` does not exist.`,
+          });
+          return;
+        }
+
         await DailyModel.deleteOne({ name });
+        delete bot.cronCache[daily._id];
 
         await interaction.editReply({
           content: `Successfully deleted the daily with the name \`${name}\`.`,

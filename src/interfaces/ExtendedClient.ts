@@ -1,4 +1,5 @@
 import { Client, WebhookClient } from "discord.js";
+import { Job } from "node-schedule";
 
 import { Command } from "./Command";
 
@@ -11,4 +12,7 @@ export interface ExtendedClient extends Client {
     dbUrl: string;
   };
   commands: Command[];
+  cronCache: {
+    [dailyId: string]: Job;
+  };
 }
