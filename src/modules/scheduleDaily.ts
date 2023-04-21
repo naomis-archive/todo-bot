@@ -14,7 +14,11 @@ import { sendDaily } from "./sendDaily";
  */
 export const scheduleDaily = async (bot: ExtendedClient, daily: Daily) => {
   try {
-    await scheduleJob(daily.cron, async () => await sendDaily(bot, daily));
+    const job = await scheduleJob(
+      daily.cron,
+      async () => await sendDaily(bot, daily)
+    );
+    bot.cronCache[daily._id] = job;
   } catch (err) {
     await errorHandler(bot, "schedule daily", err);
   }
