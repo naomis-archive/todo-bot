@@ -13,6 +13,7 @@ import { validateEnv } from "./utils/validateEnv";
     intents: [GatewayIntentBits.Guilds],
   }) as ExtendedClient;
   bot.env = validateEnv();
+  bot.cronCache = {};
   // does not change the values of bot.
   // eslint-disable-next-line require-atomic-updates
   bot.commands = await loadCommands(bot);
