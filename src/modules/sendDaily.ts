@@ -1,6 +1,6 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 
-import { Daily } from "../database/models/Daily";
+import { Daily, DailyModel } from "../database/models/Daily";
 import { ExtendedClient } from "../interfaces/ExtendedClient";
 import { errorHandler } from "../utils/errorHandler";
 
@@ -8,12 +8,21 @@ import { errorHandler } from "../utils/errorHandler";
  * Sends a daily reminder to Naomi.
  *
  * @param {ExtendedClient} bot The bot's Discord instance.
- * @param {Daily} daily The daily to send.
+ * @param {Daily} staleDaily The daily to send.
  */
-export const sendDaily = async (bot: ExtendedClient, daily: Daily) => {
+export const sendDaily = async (bot: ExtendedClient, staleDaily: Daily) => {
   try {
     const guild = await bot.guilds.fetch(bot.env.homeGuild);
     const naomi = await guild.members.fetch(bot.env.ownerId);
+
+    const daily = await DailyModel.findById(staleDaily._id);
+
+    if (!daily) {
+      await naomi.send(`Daily **${staleDaily.name}** does not exist.`);
+      bot.cronCache[staleDaily._id].cancel();
+      delete bot.cronCache[staleDaily._id];
+      return;
+    }
 
     const button = new ButtonBuilder()
       .setLabel("Complete")
