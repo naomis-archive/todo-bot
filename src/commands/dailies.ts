@@ -93,6 +93,7 @@ export const dailies: Command = {
         }
 
         await DailyModel.deleteOne({ name });
+        bot.cronCache[daily._id].cancel();
         delete bot.cronCache[daily._id];
 
         await interaction.editReply({
