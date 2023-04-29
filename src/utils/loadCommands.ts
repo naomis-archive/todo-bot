@@ -8,12 +8,12 @@ import { errorHandler } from "./errorHandler";
 
 /**
  * Reads the `/commands` directory and dynamically imports the files,
- * returning an array of Command objects.
+ * returning a success status upon mounting to bot instance.
  *
  * @param {ExtendedClient} bot The bot's Discord instance.
- * @returns {Command[]} Array of Command objects.
+ * @returns {boolean} If commands were successfully mounted and loaded.
  */
-export const loadCommands = async (bot: ExtendedClient): Promise<Command[]> => {
+export const loadCommands = async (bot: ExtendedClient): Promise<boolean> => {
   try {
     const result: Command[] = [];
     const files = await readdir(join(process.cwd(), "prod", "commands"));
@@ -22,9 +22,10 @@ export const loadCommands = async (bot: ExtendedClient): Promise<Command[]> => {
       const mod = await import(join(process.cwd(), "prod", "commands", file));
       result.push(mod[name] as Command);
     }
-    return result;
+    bot.commands = result;
+    return true;
   } catch (err) {
     await errorHandler(bot, "load commands", err);
-    return [];
+    return false;
   }
 };
