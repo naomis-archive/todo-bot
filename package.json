@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/naomi-lgbt/todo-bot#readme",
   "dependencies": {
-    "cronstrue": "2.27.0",
+    "cronstrue": "2.28.0",
     "discord.js": "14.11.0",
     "dotenv": "16.3.1",
     "mongoose": "7.3.2",
